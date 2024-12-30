@@ -1,0 +1,28 @@
+<%= turbo_frame_tag ticket do %>
+  <div
+    id="<%= dom_id ticket, :wrapper %>"
+    class="ticket-card"
+    draggable="true"
+    data-drag-target="draggable"
+    data-action="dragstart->drag#start"
+    data-change-state-url="<%= update_state_ticket_path(ticket) %>"
+  >
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Title:</strong>
+      <%= ticket.title %>
+    </p>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Description:</strong>
+      <%= ticket.description %>
+    </p>
+
+    <%= link_to "Edit this ticket", edit_ticket_path(ticket), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="inline-block ml-2">
+      <%= button_to "Destroy this ticket",
+                    ticket, method: :delete, data: {turbo_frame: "_top"},
+                    class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
+      %>
+    </div>
+  </div>
+<% end %>
